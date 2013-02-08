@@ -33,7 +33,13 @@ class WhatTheFile
   
   public function save_current_page($template_name)
   {
-    $this->template_name = basename($template_name);
+		$this->template_name = basename($template_name);
+
+		// Do Roots Theme check
+		if(function_exists('roots_template_path')) {
+			$this->template_name = basename(roots_template_path());
+		}
+
     return $template_name;
   }
 
