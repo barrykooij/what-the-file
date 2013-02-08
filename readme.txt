@@ -3,8 +3,8 @@ Contributors: barrykooij
 Donate link: 
 Tags: toolbar, development, file, template, template editing
 Requires at least: 3.1
-Tested up to: 3.5
-Stable tag: 1.0.3
+Tested up to: 3.5.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,11 @@ You have to be an Administrator to see the "What The File" option.
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added Roots Theme support.
+* Added WordPress 3.5.1 support.
+* Meta information changed.
 
 = 1.0.3 =
 * Added WordPress 3.5 support.
