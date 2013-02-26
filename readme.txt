@@ -35,6 +35,9 @@ You have to be an Administrator to see the "What The File" option.
 
 == Changelog ==
 
+= 1.1.1 =
+* Small meta information changes.
+
 = 1.1.0 =
 * Added Roots Theme support.
 * Added WordPress 3.5.1 support.
