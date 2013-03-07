@@ -1,18 +1,21 @@
 === What The File ===
 Contributors: barrykooij
 Donate link: 
-Tags: toolbar, development, file, template, template editing
+Tags: toolbar, development, file, template, template editing, Template Hierarchy, themes
 Requires at least: 3.1
 Tested up to: 3.5.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Find out what template file (PHP) is used on the current page. What The File will be visible in the Toolbar when viewing your website.
+What The File adds an option to your toolbar showing you what file is used to display the page you’re on. If you want to you can click the file name to edit it directly through the theme editor, though I don’t recommend this for bigger changes. Since version 1.1.0 What The File also supports Roots Theme based themes.
 
 == Description ==
 
-Find out what template file (PHP) is used on the current page. What The File will be visible in the Toolbar when viewing your website.
+What The File adds an option to your toolbar showing you what file is used to display the page you’re on. If you want to you can click the file name to edit it directly through the theme editor, though I don’t recommend this for bigger changes. Since version 1.1.0 What The File also supports Roots Theme based themes.
+
+More information can be found <a href='http://www.barrykooij.com/what-the-file/'>here</a>.
+For support please visit the <a href='http://wordpress.org/support/plugin/what-the-file'>Support forum</a>.
 
 == Installation ==
 
@@ -34,6 +37,9 @@ You have to be an Administrator to see the "What The File" option.
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.1.2 =
+* Fixed admin url bug caused when WordPress is installed in a subdirectory
 
 = 1.1.1 =
 * Small meta information changes.
