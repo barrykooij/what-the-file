@@ -39,7 +39,7 @@ You have to be an Administrator to see the "What The File" option.
 == Changelog ==
 
 = 1.1.2 =
-* Fixed admin url bug caused when WordPress is installed in a subdirectory
+* Fixed admin url bug caused when WordPress is installed in a subdirectory.
 
 = 1.1.1 =
 * Small meta information changes.
