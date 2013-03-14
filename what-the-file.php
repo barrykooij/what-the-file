@@ -43,6 +43,10 @@ class WhatTheFile
 		return true;
 	}
 
+	private function get_current_page()
+	{
+		return $this->template_name;
+	}
 
 	private function hooks()
 	{
@@ -63,11 +67,6 @@ class WhatTheFile
 			$this->template_name = str_ireplace( get_template_directory() . '/', '', $template );
 		}
 	}
-
-  private function get_current_page()
-  {
-    return $this->template_name;
-  }
   
   public function save_current_page( $template_name )
   {
