@@ -32,8 +32,8 @@ class WhatTheFile
 	private function hooks()
 	{
 		add_action( 'wp_head'						, array( $this, 'print_css' ) );
-		add_filter( 'template_include'		, array( $this, 'save_current_page' ), 1000 );
-		add_action( 'admin_bar_menu'			, array( $this, 'admin_bar_menu' ), 1000 );
+		add_filter( 'template_include'	, array( $this, 'save_current_page' ), 1000 );
+		add_action( 'admin_bar_menu'		, array( $this, 'admin_bar_menu' ), 1000 );
 
 		// BuddyPress hook
 		if( class_exists( 'BuddyPress' ) ) {
@@ -68,8 +68,8 @@ class WhatTheFile
 
   public function admin_bar_menu() {
     global $wp_admin_bar;      
-    $wp_admin_bar->add_menu( array( 'id' => 'wtf-bar', 'parent' => 'top-secondary', 'title' => __('What The File', 'what-the-file'), 'href' => FALSE ) );
-    $wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-sub', 'parent' => 'wtf-bar', 'title' => $this->get_current_page(), 'href' => get_admin_url().'theme-editor.php?file='.$this->get_current_page().'&theme='.get_template() ) );
+    $wp_admin_bar->add_menu( array( 'id' => 'wtf-bar'			, 'parent' => 'top-secondary'	, 'title' => __( 'What The File', 'what-the-file' )	, 'href' => FALSE ) );
+    $wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-sub'	, 'parent' => 'wtf-bar'				, 'title' => $this->get_current_page()							, 'href' => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . get_template() ) );
   }
   
   public function print_css()
