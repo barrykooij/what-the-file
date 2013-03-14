@@ -31,7 +31,6 @@ class WhatTheFile
 
 	private function hooks()
 	{
-		add_action( 'init'								, array( $this, 'setup' ) );
 		add_action( 'wp_head'						, array( $this, 'print_css' ) );
 		add_filter( 'template_include'		, array( $this, 'save_current_page' ), 1000 );
 		add_action( 'admin_bar_menu'			, array( $this, 'admin_bar_menu' ), 1000 );
@@ -53,12 +52,6 @@ class WhatTheFile
   private function get_current_page()
   {
     return $this->template_name;
-  }
-
-  public function setup()
-  {
-    if(!is_super_admin() || !is_admin_bar_showing()){return false;}
-    if(is_admin()){return false;}
   }
   
   public function save_current_page( $template_name )
