@@ -14,11 +14,9 @@ class WhatTheFile
   
   public function __construct()
   {
-		if( !$this->check_admin() ) {
-			return false;
+		if( $this->check_admin() ) {
+			$this->hooks();
 		}
-
-		$this->hooks();
   }
 
 	private function check_admin()
