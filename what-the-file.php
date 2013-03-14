@@ -14,9 +14,42 @@ class WhatTheFile
   
   public function __construct()
   {
-    add_action('init', array(&$this, 'setup')); 
+		if( !$this->check_admin() ) {
+			return false;
+		}
+
+		$this->hooks();
   }
-  
+
+	private function check_admin()
+	{
+		if(!is_super_admin() || !is_admin_bar_showing()){return false;}
+		if(is_admin()){return false;}
+		return true;
+	}
+
+
+	private function hooks()
+	{
+		add_action('init'								, array(&$this, 'setup'));
+		add_action('wp_head'						, array(&$this, 'print_css'));
+		add_filter('template_include'		, array(&$this, 'save_current_page'), 1000);
+		add_action('admin_bar_menu'			, array(&$this, 'admin_bar_menu' ), 1000);
+
+		// BuddyPress hook
+		if( class_exists( 'BuddyPress' ) ) {
+			add_action( 'bp_core_pre_load_template', array( $this, 'save_buddy_press_template' ) );
+		}
+
+	}
+
+	public function save_buddy_press_template( $template )
+	{
+		if( $this->template_name == '' ) {
+			$this->template_name = str_ireplace( get_template_directory() . '/', '', $template );
+		}
+	}
+
   private function get_current_page()
   {
     return $this->template_name;
@@ -26,9 +59,6 @@ class WhatTheFile
   {
     if(!is_super_admin() || !is_admin_bar_showing()){return false;}
     if(is_admin()){return false;}
-    add_action('wp_head',             array(&$this, 'print_css'));
-    add_filter('template_include',    array(&$this, 'save_current_page'), 1000);
-    add_action('admin_bar_menu',      array(&$this, 'admin_bar_menu' ), 1000);
   }
   
   public function save_current_page($template_name)
@@ -55,5 +85,6 @@ class WhatTheFile
   }
   
 }
-new WhatTheFile();
+
+add_action( 'plugins_loaded', create_function('', 'new WhatTheFile();') );
 ?>
