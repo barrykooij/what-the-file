@@ -23,18 +23,18 @@ class WhatTheFile
 
 	private function check_admin()
 	{
-		if(!is_super_admin() || !is_admin_bar_showing()){return false;}
-		if(is_admin()){return false;}
+		if( !is_super_admin() || !is_admin_bar_showing() ){ return false; }
+		if( is_admin() ){ return false; }
 		return true;
 	}
 
 
 	private function hooks()
 	{
-		add_action('init'								, array(&$this, 'setup'));
-		add_action('wp_head'						, array(&$this, 'print_css'));
-		add_filter('template_include'		, array(&$this, 'save_current_page'), 1000);
-		add_action('admin_bar_menu'			, array(&$this, 'admin_bar_menu' ), 1000);
+		add_action( 'init'								, array( $this, 'setup' ) );
+		add_action( 'wp_head'						, array( $this, 'print_css' ) );
+		add_filter( 'template_include'		, array( $this, 'save_current_page' ), 1000 );
+		add_action( 'admin_bar_menu'			, array( $this, 'admin_bar_menu' ), 1000 );
 
 		// BuddyPress hook
 		if( class_exists( 'BuddyPress' ) ) {
@@ -54,20 +54,20 @@ class WhatTheFile
   {
     return $this->template_name;
   }
-  
+
   public function setup()
   {
     if(!is_super_admin() || !is_admin_bar_showing()){return false;}
     if(is_admin()){return false;}
   }
   
-  public function save_current_page($template_name)
+  public function save_current_page( $template_name )
   {
-		$this->template_name = basename($template_name);
+		$this->template_name = basename( $template_name );
 
 		// Do Roots Theme check
-		if(function_exists('roots_template_path')) {
-			$this->template_name = basename(roots_template_path());
+		if( function_exists( 'roots_template_path' ) ) {
+			$this->template_name = basename( roots_template_path() );
 		}
 
     return $template_name;
@@ -86,5 +86,4 @@ class WhatTheFile
   
 }
 
-add_action( 'plugins_loaded', create_function('', 'new WhatTheFile();') );
-?>
+add_action( 'plugins_loaded', create_function( '', 'new WhatTheFile();' ) );
