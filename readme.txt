@@ -26,7 +26,7 @@ For support please visit the <a href='http://wordpress.org/support/plugin/what-t
 
 = Where can I see what template file is used? =
 
-In the toolbar you will find the "What The File" option. Hovering this option will display the currently used template file, clicking the template file name will allow you to edit the template file with the WordPress file editor.
+In the toolbar you will find the "What The File" option. Hovering this option will display the currently used template file, clicking the template file name will allow you to edit the template file with the WordPress file editor. Please note that some BuddyPress files can't be edited in the WordPress editor.
 
 = I can't find the "What The File" option in the toolbar =
 
