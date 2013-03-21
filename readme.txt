@@ -1,14 +1,14 @@
 === What The File ===
 Contributors: barrykooij
 Donate link: 
-Tags: toolbar, development, file, template, template editing, Template Hierarchy, themes
+Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file
 Requires at least: 3.1
 Tested up to: 3.5.1
 Stable tag: 1.2.1
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-What The File adds an option to your toolbar showing you what file is used to display the page you’re on. If you want to you can click the file name to edit it directly through the theme editor. Supports BuddyPress and Roots Theme.
+What The File adds an option to your toolbar showing you what file is used to display the page you’re on. Click to edit directly through the theme editor. Supports BuddyPress and Roots Theme.
 
 == Description ==
 
