@@ -4,15 +4,15 @@ Donate link:
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file
 Requires at least: 3.1
 Tested up to: 3.5.1
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-What The File adds an option to your toolbar showing you what file is used to display the page you’re on. Click to edit directly through the theme editor. Supports BuddyPress and Roots Theme.
+What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing.
 
 == Description ==
 
-What The File adds an option to your toolbar showing you what file is used to display the page you’re on. If you want to you can click the file name to edit it directly through the theme editor, though I don’t recommend this for bigger changes. What The File also supports BuddyPress and Roots Theme based themes.
+What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing. You can click the file name to directly edit it through the theme editor, though I don’t recommend this for bigger changes. What The File supports BuddyPress and Roots Theme based themes.
 
 More information can be found <a href='http://www.barrykooij.com/what-the-file/'>here</a>.
 For support please visit the <a href='http://wordpress.org/support/plugin/what-the-file'>Support forum</a>.
@@ -45,6 +45,9 @@ Yes it does.
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.3.0 =
+* Added template part support.
 
 = 1.2.1 =
 * Improved the admin panel and administrator role check.

@@ -2,7 +2,7 @@
 /*
   Plugin Name: What The File
   Plugin URI: http://www.barrykooij.com/what-the-file/
-  Description: What The File adds an option to your toolbar showing you what file is used to display the page you’re on. If you want to you can click the file name to edit it directly through the theme editor. Supports BuddyPress and Roots Theme. More information can be found at the <a href='http://wordpress.org/extend/plugins/what-the-file/'>WordPress plugin page</a>.
+  Description: What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing. You can click the file name to directly edit it through the theme editor. Supports BuddyPress and Roots Theme. More information can be found at the <a href='http://wordpress.org/extend/plugins/what-the-file/'>WordPress plugin page</a>.
   Version: 1.3.0
   Author: Barry Kooij
   Author URI: http://www.barrykooij.com/
