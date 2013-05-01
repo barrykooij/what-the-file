@@ -187,12 +187,12 @@ class WhatTheFile
 		global $wp_admin_bar;
 
 		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar', 'parent' => 'top-secondary', 'title' => __( 'What The File', 'what-the-file' )	, 'href' => false ) );
-		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-file', 'parent' => 'wtf-bar', 'title' => $this->get_current_page(), 'href' => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . get_template() ) );
+		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-file', 'parent' => 'wtf-bar', 'title' => $this->get_current_page(), 'href' => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . get_stylesheet() ) );
 
 		if( count( $this->template_parts ) > 0 ) {
 			$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-parts', 'parent' => 'wtf-bar', 'title' => 'Template Parts', 'href' => false ) );
 			foreach( $this->template_parts as $template_part ) {
-				$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-part-' . $template_part, 'parent' => 'wtf-bar-template-parts', 'title' => $template_part, 'href' => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . get_template() ) );
+				$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-part-' . $template_part, 'parent' => 'wtf-bar-template-parts', 'title' => $template_part, 'href' => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . get_stylesheet() ) );
 			}
 		}
 	}
