@@ -4,7 +4,7 @@ Donate link:
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file
 Requires at least: 3.1
 Tested up to: 3.5.1
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,6 +45,9 @@ Yes it does.
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.3.2 =
+* Plugin now check if file exists in child theme or parent theme.
 
 = 1.3.1 =
 * Editing files directly through the theme editor now supports child themes.
