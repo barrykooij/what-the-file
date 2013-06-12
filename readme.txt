@@ -1,6 +1,6 @@
 === What The File ===
 Contributors: barrykooij
-Donate link: 
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7QDZTLCRKSMG
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file
 Requires at least: 3.1
 Tested up to: 3.5.1
