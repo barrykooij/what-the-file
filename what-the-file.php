@@ -126,8 +126,18 @@ class WhatTheFile
 			return;
 		}
 
-		if( $slug != null && $name != null ){
-			$this->template_parts[] = $slug . '-' . $name . '.php';
+		if( $slug != null ){
+			$templates = array();
+
+			if($name != null)
+				$templates[] = "{$slug}-{$name}.php";
+
+			$templates[] = "{$slug}.php";
+
+			$found = locate_template($templates);
+			$found = str_replace(get_template_directory().'/', '', $found);
+			if($found != '')
+				$this->template_parts[] = $found;
 		}
 	}
 
