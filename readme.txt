@@ -1,10 +1,10 @@
 === What The File ===
 Contributors: barrykooij
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7QDZTLCRKSMG
-Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file
+Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
-Tested up to: 3.5.1
-Stable tag: 1.3.2
+Tested up to: 3.6.1
+Stable tag: 1.4.0
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,6 +45,10 @@ Yes it does.
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.4.0 =
+* Fixed a template part bug, props remyvv
+* Code style change
 
 = 1.3.2 =
 * Plugin now check if file exists in child theme or parent theme.
