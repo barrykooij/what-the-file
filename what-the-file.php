@@ -32,26 +32,22 @@ class WhatTheFile
 	private $template_name  				= '';
 	private $template_parts					= array();
 
-	public static function plugin_activation()
-	{
+	public static function plugin_activation() {
 		self::insert_install_date();
 	}
 
-	public function __construct()
-	{
+	public function __construct() {
 		$this->hooks();
 	}
 
-	private static function insert_install_date()
-	{
+	private static function insert_install_date() {
 		$datetime_now = new DateTime();
 		$date_string 	= $datetime_now->format('Y-m-d');
 		add_site_option( self::OPTION_INSTALL_DATE, $date_string, '', 'no' );
 		return $date_string;
 	}
 
-	private function get_install_date()
-	{
+	private function get_install_date() {
 		$date_string = get_site_option( self::OPTION_INSTALL_DATE,  '' );
 		if( $date_string == '' ) {
 			// There is no install date, plugin was installed before version 1.2.0. Add it now.
@@ -60,19 +56,17 @@ class WhatTheFile
 		return new DateTime( $date_string );
 	}
 
-	private function get_current_page()
-	{
+	private function get_current_page() {
 		return $this->template_name;
 	}
 
-	private function get_admin_querystring_array()
-	{
+	private function get_admin_querystring_array() {
 		parse_str( $_SERVER['QUERY_STRING'], $params );
 		return $params;
 	}
 
-	private function hooks()
-	{
+	private function hooks() {
+
 		// Check if user is an administrator
 		if( !current_user_can('manage_options') ) {
 			return false;
@@ -115,34 +109,39 @@ class WhatTheFile
 		add_action( 'all', array( $this, 'save_template_parts' ), 1, 3 );
 	}
 
-	private function file_exists_in_child_theme( $file )
-	{
+	private function file_exists_in_child_theme( $file ) {
 		return file_exists( STYLESHEETPATH . '/' . $file );
 	}
 
-	public function save_template_parts( $tag, $slug=null, $name=null )
-	{
+	public function save_template_parts( $tag, $slug=null, $name=null ) {
 		if( 0 !== strpos( $tag, 'get_template_part_' ) ) {
 			return;
 		}
 
-		if( $slug != null ){
+		// Check if slug is set
+		if( $slug != null ) {
+
+			// Templates array
 			$templates = array();
 
+			// Add possible template part to array
 			if($name != null)
 				$templates[] = "{$slug}-{$name}.php";
 
+			// Add possible template part to array
 			$templates[] = "{$slug}.php";
 
-			$found = locate_template($templates);
-			$found = str_replace(get_template_directory().'/', '', $found);
-			if($found != '')
-				$this->template_parts[] = $found;
+			// Get the correct template part
+			$template_part = str_replace( get_template_directory().'/', '', locate_template( $templates ) );
+
+			// Add template part if found
+			if( $template_part != '' )
+				$this->template_parts[] = $template_part;
 		}
+
 	}
 
-	public function catch_hide_notice()
-	{
+	public function catch_hide_notice() {
 		if( isset( $_GET[ self::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
 			// Add user meta
 			global $current_user;
@@ -168,25 +167,26 @@ class WhatTheFile
 		}
 	}
 
-	public function display_admin_notice()
-	{
+	public function display_admin_notice() {
+
 		$query_params = $this->get_admin_querystring_array();
 		$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
 
 		echo '<div class="updated"><p>';
 		printf(__("You've been using <b>What The File</b> for some time now, could you please give it a review at wordpress.org? <br /><br /> <a href='%s' target='_blank'>Yes, take me there!</a> - <a href='%s'>I've already done this!</a>"), 'http://wordpress.org/support/view/plugin-reviews/what-the-file', $query_string );
 		echo "</p></div>";
+
 	}
 
-	public function save_buddy_press_template( $template )
-	{
+	public function save_buddy_press_template( $template ) {
+
 		if( $this->template_name == '' ) {
 			$this->template_name = str_ireplace( get_template_directory() . '/', '', $template );
 		}
+
 	}
 
-	public function save_current_page( $template_name )
-	{
+	public function save_current_page( $template_name ) {
 		$this->template_name = basename( $template_name );
 
 		// Do Roots Theme check
@@ -197,8 +197,7 @@ class WhatTheFile
 		return $template_name;
 	}
 
-	public function admin_bar_menu()
-	{
+	public function admin_bar_menu() {
 		global $wp_admin_bar;
 
 		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar', 'parent' => 'top-secondary', 'title' => __( 'What The File', 'what-the-file' )	, 'href' => false ) );
@@ -228,8 +227,7 @@ class WhatTheFile
 		}
 	}
 
-	public function print_css()
-	{
+	public function print_css() {
 		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;}</style>\n";
 	}
 
