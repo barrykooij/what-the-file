@@ -133,6 +133,7 @@ class WhatTheFile
 
 			// Get the correct template part
 			$template_part = str_replace( get_template_directory().'/', '', locate_template( $templates ) );
+			$template_part = str_replace( get_stylesheet_directory().'/', '', locate_template( $templates ) );
 
 			// Add template part if found
 			if( $template_part != '' )
@@ -182,6 +183,7 @@ class WhatTheFile
 
 		if( $this->template_name == '' ) {
 			$this->template_name = str_ireplace( get_template_directory() . '/', '', $template );
+			$this->template_name = str_ireplace( get_stylesheet_directory() . '/', '', $template );
 		}
 
 	}
