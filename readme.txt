@@ -3,8 +3,8 @@ Contributors: barrykooij
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7QDZTLCRKSMG
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
-Tested up to: 3.6.1
-Stable tag: 1.4.0
+Tested up to: 3.8.1
+Stable tag: 1.4.1
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
