@@ -182,8 +182,10 @@ class WhatTheFile
 	public function save_buddy_press_template( $template ) {
 
 		if( $this->template_name == '' ) {
-			$this->template_name = str_ireplace( get_template_directory() . '/', '', $template );
-			$this->template_name = str_ireplace( get_stylesheet_directory() . '/', '', $this->template_name );
+			$template_name = $template;
+			$template_name = str_ireplace( get_template_directory() . '/', '', $template_name );
+			$template_name = str_ireplace( get_stylesheet_directory() . '/', '', $template_name );
+			$this->template_name = $template_name;
 		}
 
 	}
