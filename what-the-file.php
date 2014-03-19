@@ -133,6 +133,7 @@ class WhatTheFile
 
 			// Get the correct template part
 			$template_part = str_replace( get_template_directory().'/', '', locate_template( $templates ) );
+			$template_part = str_replace( get_stylesheet_directory().'/', '', $template_part );
 
 			// Add template part if found
 			if( $template_part != '' )
@@ -182,6 +183,7 @@ class WhatTheFile
 
 		if( $this->template_name == '' ) {
 			$this->template_name = str_ireplace( get_template_directory() . '/', '', $template );
+			$this->template_name = str_ireplace( get_stylesheet_directory() . '/', '', $this->template_name );
 		}
 
 	}
@@ -228,7 +230,7 @@ class WhatTheFile
 	}
 
 	public function print_css() {
-		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;}</style>\n";
+		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }</style>\n";
 	}
 
 }
