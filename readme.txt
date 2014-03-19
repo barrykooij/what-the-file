@@ -8,11 +8,11 @@ Stable tag: 1.4.1
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing.
+What The File adds an option to your toolbar showing what file and template parts are used to display the page you're currently viewing.
 
 == Description ==
 
-What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing. You can click the file name to directly edit it through the theme editor, though I don’t recommend this for bigger changes. What The File supports BuddyPress and Roots Theme based themes.
+What The File adds an option to your toolbar showing what file and template parts are used to display the page you're currently viewing. You can click the file name to directly edit it through the theme editor, though I don't recommend this for bigger changes. What The File supports BuddyPress and Roots Theme based themes.
 
 More information can be found <a href='http://www.barrykooij.com/what-the-file/'>here</a>.
 For support please visit the <a href='http://wordpress.org/support/plugin/what-the-file'>Support forum</a>.
