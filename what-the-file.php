@@ -1,12 +1,12 @@
 <?php
 
 /*
-  Plugin Name: What The File
-  Plugin URI: http://www.barrykooij.com/what-the-file/
-  Description: What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing. You can click the file name to directly edit it through the theme editor. Supports BuddyPress and Roots Theme. More information can be found at the <a href='http://wordpress.org/extend/plugins/what-the-file/'>WordPress plugin page</a>.
-  Version: 1.4.1
-  Author: Barry Kooij
-  Author URI: http://www.barrykooij.com/
+	Plugin Name: What The File
+	Plugin URI: http://www.barrykooij.com/what-the-file/
+	Description: What The File adds an option to your toolbar showing what file and template parts are used to display the page you’re currently viewing. You can click the file name to directly edit it through the theme editor. Supports BuddyPress and Roots Theme. More information can be found at the <a href='http://wordpress.org/plugins/what-the-file/'>WordPress plugin page</a>.
+	Version: 1.4.1
+	Author: Barry Kooij
+	Author URI: http://www.barrykooij.com/
 	License: GPL v3
 
 	What The File Plugin
@@ -122,27 +122,28 @@ class WhatTheFile {
 		}
 
 		// Check if slug is set
-		if ( $slug != null ) {
+		if ( $slug == null ) {
+			return;
+		}
 
-			// Templates array
-			$templates = array();
+		// Templates array
+		$templates = array();
 
-			// Add possible template part to array
-			if ( $name != null ) {
-				$templates[] = "{$slug}-{$name}.php";
-			}
+		// Add possible template part to array
+		if ( $name != null ) {
+			$templates[] = "{$slug}-{$name}.php";
+		}
 
-			// Add possible template part to array
-			$templates[] = "{$slug}.php";
+		// Add possible template part to array
+		$templates[] = "{$slug}.php";
 
-			// Get the correct template part
-			$template_part = str_replace( get_template_directory() . '/', '', locate_template( $templates ) );
-			$template_part = str_replace( get_stylesheet_directory() . '/', '', $template_part );
+		// Get the correct template part
+		$template_part = str_replace( get_template_directory() . '/', '', locate_template( $templates ) );
+		$template_part = str_replace( get_stylesheet_directory() . '/', '', $template_part );
 
-			// Add template part if found
-			if ( $template_part != '' ) {
-				$this->template_parts[] = $template_part;
-			}
+		// Add template part if found
+		if ( $template_part != '' ) {
+			$this->template_parts[] = $template_part;
 		}
 
 	}
@@ -179,7 +180,13 @@ class WhatTheFile {
 		$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
 
 		echo '<div class="updated"><p>';
-		printf( __( "You've been using <b>What The File</b> for some time now, could you please give it a review at wordpress.org? <br /><br /> <a href='%s' target='_blank'>Yes, take me there!</a> - <a href='%s'>I've already done this!</a>" ), 'http://wordpress.org/support/view/plugin-reviews/what-the-file', $query_string );
+		printf( __( "You've been using <b>What The File</b> for some time now,
+			could you please give it a review at wordpress.org? <br /><br />
+			<a href='%s' target='_blank'>Yes, take me there!</a> -
+			<a href='%s'>I've already done this!</a>" ),
+			'http://wordpress.org/support/view/plugin-reviews/what-the-file',
+			$query_string
+		);
 		echo "</p></div>";
 
 	}
@@ -209,7 +216,12 @@ class WhatTheFile {
 	public function admin_bar_menu() {
 		global $wp_admin_bar;
 
-		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar', 'parent' => 'top-secondary', 'title' => __( 'What The File', 'what-the-file' ), 'href' => false ) );
+		$wp_admin_bar->add_menu( array(
+			'id' => 'wtf-bar',
+			'parent' => 'top-secondary',
+			'title' => __( 'What The File', 'what-the-file' ),
+			'href' => false
+		) );
 
 		// Check if template file exists in child theme
 		$theme = get_stylesheet();
@@ -217,10 +229,32 @@ class WhatTheFile {
 			$theme = get_template();
 		}
 
-		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-file', 'parent' => 'wtf-bar', 'title' => $this->get_current_page(), 'href' => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme ) );
+		$allow_edit = true;
+		if ( defined( 'DISALLOW_FILE_EDIT' ) && DISALLOW_FILE_EDIT )
+			$allow_edit = false;
+		elseif ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS )
+			$allow_edit = false;
+
+		$page_href = get_admin_url() .
+			'theme-editor.php?file='
+			. $this->get_current_page()
+			. '&theme='
+			. $theme;
+
+		$wp_admin_bar->add_menu( array(
+			'id' => 'wtf-bar-template-file',
+			'parent' => 'wtf-bar',
+			'title' => $this->get_current_page(),
+			'href' => $allow_edit ? $page_href : false
+		) );
 
 		if ( count( $this->template_parts ) > 0 ) {
-			$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-parts', 'parent' => 'wtf-bar', 'title' => 'Template Parts', 'href' => false ) );
+			$wp_admin_bar->add_menu( array(
+				'id' => 'wtf-bar-template-parts',
+				'parent' => 'wtf-bar',
+				'title' => __( 'Template Parts', 'what-the-file' ),
+				'href' => false
+			) );
 
 			foreach ( $this->template_parts as $template_part ) {
 
@@ -230,14 +264,31 @@ class WhatTheFile {
 					$theme = get_template();
 				}
 
-				$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-part-' . $template_part, 'parent' => 'wtf-bar-template-parts', 'title' => $template_part, 'href' => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme ) );
+				$part_href = get_admin_url()
+					. 'theme-editor.php?file='
+					. $template_part
+					. '&theme='
+					. $theme;
+
+				$wp_admin_bar->add_menu( array(
+					'id' => 'wtf-bar-template-part-' . $template_part,
+					'parent' => 'wtf-bar-template-parts',
+					'title' => $template_part,
+					'href' => $allow_edit ? $part_href : false
+				) );
 			}
 
 		}
 	}
 
 	public function print_css() {
-		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }</style>\n";
+		echo '<style type="text/css" media="screen">
+			#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item,
+			#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts
+				{ text-align:right; }
+			#wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before
+				{ right:auto !important; }</style>'
+			. PHP_EOL;
 	}
 
 }
