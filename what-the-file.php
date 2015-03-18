@@ -27,19 +27,35 @@
 */
 
 class WhatTheFile {
+
 	const OPTION_INSTALL_DATE = 'whatthefile-install-date';
 	const OPTION_ADMIN_NOTICE_KEY = 'whatthefile-hide-notice';
+
+	/** @var string $template_name */
 	private $template_name = '';
+
+	/** @var array $template_parts */
 	private $template_parts = array();
 
+	/**
+	 * Method run on plugin activation
+	 */
 	public static function plugin_activation() {
 		self::insert_install_date();
 	}
 
+	/**
+	 * Constructor
+	 */
 	public function __construct() {
 		$this->hooks();
 	}
 
+	/**
+	 * Insert the install date
+	 *
+	 * @return string
+	 */
 	private static function insert_install_date() {
 		$datetime_now = new DateTime();
 		$date_string  = $datetime_now->format( 'Y-m-d' );
@@ -48,6 +64,11 @@ class WhatTheFile {
 		return $date_string;
 	}
 
+	/**
+	 * Get the install data
+	 *
+	 * @return DateTime
+	 */
 	private function get_install_date() {
 		$date_string = get_site_option( self::OPTION_INSTALL_DATE, '' );
 		if ( $date_string == '' ) {
@@ -58,16 +79,31 @@ class WhatTheFile {
 		return new DateTime( $date_string );
 	}
 
+	/**
+	 * Get the current page
+	 *
+	 * @return string
+	 */
 	private function get_current_page() {
 		return $this->template_name;
 	}
 
+	/**
+	 * Parse the admin query string
+	 *
+	 * @return array
+	 */
 	private function get_admin_querystring_array() {
 		parse_str( $_SERVER['QUERY_STRING'], $params );
 
 		return $params;
 	}
 
+	/**
+	 * Setup the hooks
+	 *
+	 * @return void
+	 */
 	private function hooks() {
 
 		// Check if user is an administrator
@@ -112,10 +148,24 @@ class WhatTheFile {
 		add_action( 'all', array( $this, 'save_template_parts' ), 1, 3 );
 	}
 
+	/**
+	 * Check if file exists in child theme
+	 *
+	 * @param $file
+	 *
+	 * @return bool
+	 */
 	private function file_exists_in_child_theme( $file ) {
 		return file_exists( STYLESHEETPATH . '/' . $file );
 	}
 
+	/**
+	 * Save the template parts in our array
+	 *
+	 * @param $tag
+	 * @param null $slug
+	 * @param null $name
+	 */
 	public function save_template_parts( $tag, $slug = null, $name = null ) {
 		if ( 0 !== strpos( $tag, 'get_template_part_' ) ) {
 			return;
@@ -147,6 +197,9 @@ class WhatTheFile {
 
 	}
 
+	/**
+	 * Catch the notice dismissal action
+	 */
 	public function catch_hide_notice() {
 		if ( isset( $_GET[ self::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
 			// Add user meta
@@ -173,6 +226,9 @@ class WhatTheFile {
 		}
 	}
 
+	/**
+	 * Display the admin notice
+	 */
 	public function display_admin_notice() {
 
 		$query_params = $this->get_admin_querystring_array();
@@ -184,6 +240,10 @@ class WhatTheFile {
 
 	}
 
+	/**
+	 * Save the BuddyPress template
+	 * @param $template
+	 */
 	public function save_buddy_press_template( $template ) {
 
 		if ( $this->template_name == '' ) {
@@ -195,6 +255,13 @@ class WhatTheFile {
 
 	}
 
+	/**
+	 * Save the current page in our local var
+	 *
+	 * @param $template_name
+	 *
+	 * @return mixed
+	 */
 	public function save_current_page( $template_name ) {
 		$this->template_name = basename( $template_name );
 
@@ -206,13 +273,17 @@ class WhatTheFile {
 		return $template_name;
 	}
 
+	/**
+	 * Add the admin bar menu
+	 */
 	public function admin_bar_menu() {
 		global $wp_admin_bar;
 
-		$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar',
-		                                'parent' => 'top-secondary',
-		                                'title'  => __( 'What The File', 'what-the-file' ),
-		                                'href'   => false
+		$wp_admin_bar->add_menu( array(
+			'id'     => 'wtf-bar',
+			'parent' => 'top-secondary',
+			'title'  => __( 'What The File', 'what-the-file' ),
+			'href'   => false
 		) );
 
 		// Check if template file exists in child theme
@@ -221,17 +292,19 @@ class WhatTheFile {
 			$theme = get_template();
 		}
 
-		$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar-template-file',
-		                                'parent' => 'wtf-bar',
-		                                'title'  => $this->get_current_page(),
-		                                'href'   => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme
+		$wp_admin_bar->add_menu( array(
+			'id'     => 'wtf-bar-template-file',
+			'parent' => 'wtf-bar',
+			'title'  => $this->get_current_page(),
+			'href'   => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme
 		) );
 
 		if ( count( $this->template_parts ) > 0 ) {
-			$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar-template-parts',
-			                                'parent' => 'wtf-bar',
-			                                'title'  => 'Template Parts',
-			                                'href'   => false
+			$wp_admin_bar->add_menu( array(
+				'id'     => 'wtf-bar-template-parts',
+				'parent' => 'wtf-bar',
+				'title'  => 'Template Parts',
+				'href'   => false
 			) );
 
 			foreach ( $this->template_parts as $template_part ) {
@@ -242,16 +315,20 @@ class WhatTheFile {
 					$theme = get_template();
 				}
 
-				$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar-template-part-' . $template_part,
-				                                'parent' => 'wtf-bar-template-parts',
-				                                'title'  => $template_part,
-				                                'href'   => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme
+				$wp_admin_bar->add_menu( array(
+					'id'     => 'wtf-bar-template-part-' . $template_part,
+					'parent' => 'wtf-bar-template-parts',
+					'title'  => $template_part,
+					'href'   => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme
 				) );
 			}
 
 		}
 	}
 
+	/**
+	 * Print the custom CSS
+	 */
 	public function print_css() {
 		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }</style>\n";
 	}
