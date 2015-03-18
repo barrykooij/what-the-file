@@ -360,5 +360,15 @@ class WhatTheFile {
 
 }
 
-add_action( 'plugins_loaded', create_function( '', 'new WhatTheFile();' ) );
+/**
+ * What The File main function
+ */
+function __what_the_file_main() {
+	new WhatTheFile();
+}
+
+// Init plugin
+add_action( 'plugins_loaded', '__what_the_file_main' );
+
+// Register hook
 register_activation_hook( __FILE__, array( 'WhatTheFile', 'plugin_activation' ) );
