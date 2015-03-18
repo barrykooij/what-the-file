@@ -48,7 +48,65 @@ class WhatTheFile {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->hooks();
+		add_action( 'init', array( $this, 'frontend_hooks' ) );
+		add_action( 'admin_init', array( $this, 'admin_hooks' ) );
+	}
+
+	/**
+	 * Setup the admin hooks
+	 *
+	 * @return void
+	 */
+	public function admin_hooks() {
+
+		// Check if user is an administrator
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		// Admin notice hide catch
+		$this->catch_hide_notice();
+
+		// Is admin notice hidden?
+		$current_user = wp_get_current_user();
+		$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
+
+		// Check if we need to display the notice
+		if ( current_user_can( 'install_plugins' ) && '' == $hide_notice ) {
+			// Get installation date
+			$datetime_install = $this->get_install_date();
+			$datetime_past    = new DateTime( '-10 days' );
+
+			if ( $datetime_past >= $datetime_install ) {
+				// 10 or more days ago, show admin notice
+				add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
+			}
+		}
+	}
+
+	/**
+	 * Setup the frontend hooks
+	 *
+	 * @return void
+	 */
+	public function frontend_hooks() {
+		// Don't run in admin or if the admin bar isn't showing
+		if ( is_admin() || ! is_admin_bar_showing() ) {
+			return;
+		}
+
+		// WTF actions and filers
+		add_action( 'wp_head', array( $this, 'print_css' ) );
+		add_filter( 'template_include', array( $this, 'save_current_page' ), 1000 );
+		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 1000 );
+
+		// BuddyPress hook
+		if ( class_exists( 'BuddyPress' ) ) {
+			add_action( 'bp_core_pre_load_template', array( $this, 'save_buddy_press_template' ) );
+		}
+
+		// Template part hooks
+		add_action( 'all', array( $this, 'save_template_parts' ), 1, 3 );
 	}
 
 	/**
@@ -97,55 +155,6 @@ class WhatTheFile {
 		parse_str( $_SERVER['QUERY_STRING'], $params );
 
 		return $params;
-	}
-
-	/**
-	 * Setup the hooks
-	 *
-	 * @return void
-	 */
-	private function hooks() {
-
-		// Check if user is an administrator
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return false;
-		}
-
-		// Admin notice hide catch
-		add_action( 'admin_init', array( $this, 'catch_hide_notice' ) );
-
-		// Is admin notice hidden?
-		$current_user = wp_get_current_user();
-		$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
-
-		if ( current_user_can( 'install_plugins' ) && $hide_notice == '' ) {
-			// Get installation date
-			$datetime_install = $this->get_install_date();
-			$datetime_past    = new DateTime( '-10 days' );
-
-			if ( $datetime_past >= $datetime_install ) {
-				// 10 or more days ago, show admin notice
-				add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
-			}
-		}
-
-		// Don't add admin bar option in admin panel
-		if ( is_admin() || ! is_admin_bar_showing() ) {
-			return;
-		}
-
-		// WTF actions and filers
-		add_action( 'wp_head', array( $this, 'print_css' ) );
-		add_filter( 'template_include', array( $this, 'save_current_page' ), 1000 );
-		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 1000 );
-
-		// BuddyPress hook
-		if ( class_exists( 'BuddyPress' ) ) {
-			add_action( 'bp_core_pre_load_template', array( $this, 'save_buddy_press_template' ) );
-		}
-
-		// Template part hooks
-		add_action( 'all', array( $this, 'save_template_parts' ), 1, 3 );
 	}
 
 	/**
