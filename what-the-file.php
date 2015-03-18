@@ -160,6 +160,20 @@ class WhatTheFile {
 	}
 
 	/**
+	 * Returns if direct file editing through WordPress is allowed
+	 *
+	 * @return bool
+	 */
+	private function is_file_editing_allowed() {
+		$allowed = true;
+		if ( ( defined( 'DISALLOW_FILE_EDIT' ) && true == DISALLOW_FILE_EDIT ) || ( defined( 'DISALLOW_FILE_MODS' ) && true == DISALLOW_FILE_MODS ) ) {
+			$allowed = false;
+		}
+
+		return $allowed;
+	}
+
+	/**
 	 * Save the template parts in our array
 	 *
 	 * @param $tag
@@ -242,6 +256,7 @@ class WhatTheFile {
 
 	/**
 	 * Save the BuddyPress template
+	 *
 	 * @param $template
 	 */
 	public function save_buddy_press_template( $template ) {
@@ -279,6 +294,10 @@ class WhatTheFile {
 	public function admin_bar_menu() {
 		global $wp_admin_bar;
 
+		// Check if direct file editing is allowed
+		$edit_allowed = $this->is_file_editing_allowed();
+
+		// Add top menu
 		$wp_admin_bar->add_menu( array(
 			'id'     => 'wtf-bar',
 			'parent' => 'top-secondary',
@@ -292,14 +311,18 @@ class WhatTheFile {
 			$theme = get_template();
 		}
 
+		// Add current page
 		$wp_admin_bar->add_menu( array(
 			'id'     => 'wtf-bar-template-file',
 			'parent' => 'wtf-bar',
 			'title'  => $this->get_current_page(),
-			'href'   => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme
+			'href'   => ( ( $edit_allowed ) ? get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme : false )
 		) );
 
+		// Check if theme uses template parts
 		if ( count( $this->template_parts ) > 0 ) {
+
+			// Add template parts menu item
 			$wp_admin_bar->add_menu( array(
 				'id'     => 'wtf-bar-template-parts',
 				'parent' => 'wtf-bar',
@@ -307,6 +330,7 @@ class WhatTheFile {
 				'href'   => false
 			) );
 
+			// Loop through template parts
 			foreach ( $this->template_parts as $template_part ) {
 
 				// Check if template part exists in child theme
@@ -315,11 +339,12 @@ class WhatTheFile {
 					$theme = get_template();
 				}
 
+				// Add template part to sub menu item
 				$wp_admin_bar->add_menu( array(
 					'id'     => 'wtf-bar-template-part-' . $template_part,
 					'parent' => 'wtf-bar-template-parts',
 					'title'  => $template_part,
-					'href'   => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme
+					'href'   => ( ( $edit_allowed ) ? get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme : false )
 				) );
 			}
 
