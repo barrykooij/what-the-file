@@ -27,7 +27,7 @@
 */
 
 class WhatTheFile {
-	const OPTION_INSTALL_DATE     = 'whatthefile-install-date';
+	const OPTION_INSTALL_DATE = 'whatthefile-install-date';
 	const OPTION_ADMIN_NOTICE_KEY = 'whatthefile-hide-notice';
 	private $template_name = '';
 	private $template_parts = array();
@@ -148,14 +148,14 @@ class WhatTheFile {
 	}
 
 	public function catch_hide_notice() {
-		if ( isset( $_GET[self::OPTION_ADMIN_NOTICE_KEY] ) && current_user_can( 'install_plugins' ) ) {
+		if ( isset( $_GET[ self::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
 			// Add user meta
 			global $current_user;
 			add_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1', true );
 
 			// Build redirect URL
 			$query_params = $this->get_admin_querystring_array();
-			unset( $query_params[self::OPTION_ADMIN_NOTICE_KEY] );
+			unset( $query_params[ self::OPTION_ADMIN_NOTICE_KEY ] );
 			$query_string = http_build_query( $query_params );
 			if ( $query_string != '' ) {
 				$query_string = '?' . $query_string;
@@ -209,7 +209,11 @@ class WhatTheFile {
 	public function admin_bar_menu() {
 		global $wp_admin_bar;
 
-		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar', 'parent' => 'top-secondary', 'title' => __( 'What The File', 'what-the-file' ), 'href' => false ) );
+		$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar',
+		                                'parent' => 'top-secondary',
+		                                'title'  => __( 'What The File', 'what-the-file' ),
+		                                'href'   => false
+		) );
 
 		// Check if template file exists in child theme
 		$theme = get_stylesheet();
@@ -217,10 +221,18 @@ class WhatTheFile {
 			$theme = get_template();
 		}
 
-		$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-file', 'parent' => 'wtf-bar', 'title' => $this->get_current_page(), 'href' => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme ) );
+		$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar-template-file',
+		                                'parent' => 'wtf-bar',
+		                                'title'  => $this->get_current_page(),
+		                                'href'   => get_admin_url() . 'theme-editor.php?file=' . $this->get_current_page() . '&theme=' . $theme
+		) );
 
 		if ( count( $this->template_parts ) > 0 ) {
-			$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-parts', 'parent' => 'wtf-bar', 'title' => 'Template Parts', 'href' => false ) );
+			$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar-template-parts',
+			                                'parent' => 'wtf-bar',
+			                                'title'  => 'Template Parts',
+			                                'href'   => false
+			) );
 
 			foreach ( $this->template_parts as $template_part ) {
 
@@ -230,7 +242,11 @@ class WhatTheFile {
 					$theme = get_template();
 				}
 
-				$wp_admin_bar->add_menu( array( 'id' => 'wtf-bar-template-part-' . $template_part, 'parent' => 'wtf-bar-template-parts', 'title' => $template_part, 'href' => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme ) );
+				$wp_admin_bar->add_menu( array( 'id'     => 'wtf-bar-template-part-' . $template_part,
+				                                'parent' => 'wtf-bar-template-parts',
+				                                'title'  => $template_part,
+				                                'href'   => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme
+				) );
 			}
 
 		}
