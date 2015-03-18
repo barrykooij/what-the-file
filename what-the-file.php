@@ -100,7 +100,7 @@ class WhatTheFile {
 		add_filter( 'template_include', array( $this, 'save_current_page' ), 1000 );
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 1000 );
 
-		// BuddyPress hook
+		// BuddyPress support
 		if ( class_exists( 'BuddyPress' ) ) {
 			add_action( 'bp_core_pre_load_template', array( $this, 'save_buddy_press_template' ) );
 		}
@@ -270,7 +270,7 @@ class WhatTheFile {
 	 */
 	public function save_buddy_press_template( $template ) {
 
-		if ( $this->template_name == '' ) {
+		if ( '' == $this->template_name ) {
 			$template_name       = $template;
 			$template_name       = str_ireplace( get_template_directory() . '/', '', $template_name );
 			$template_name       = str_ireplace( get_stylesheet_directory() . '/', '', $template_name );
