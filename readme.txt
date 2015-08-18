@@ -46,7 +46,11 @@ Yes it does.
 
 == Changelog ==
 
+= 1.5.0 =
+* Only add edit link if direct file editing is allowed. Props szepeviktor
+* Wrapped initiation in hooks and split frontend and admin code.
 * Removed use of create_function.
+
 = 1.4.1 =
 * Fixed wrongly aligned arrow in MP6 - props [remyvv](https://github.com/remyvv).
 * Template parts are now correctly shown in child themes - props [remyvv](https://github.com/remyvv).
