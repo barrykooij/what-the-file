@@ -46,6 +46,9 @@ Yes it does.
 
 == Changelog ==
 
+= 1.5.0 =
+* Only add edit link if direct file editing is allowed. Props szepeviktor
+* Wrapped initiation in hooks and split frontend and admin code.
 * Removed use of create_function.
 
 = 1.4.1 =
