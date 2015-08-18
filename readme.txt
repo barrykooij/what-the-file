@@ -4,7 +4,7 @@ Donate link: http://www.barrykooij.com/donate/
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
 Tested up to: 4.3
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -49,6 +49,9 @@ Glad to hear I could help you! You can thank me in various ways, please see [my 
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.5.1 =
+* Fixed a bug where some themes make _all_ images display block.
 
 = 1.5.0 =
 * Only add edit link if direct file editing is allowed. Props szepeviktor
