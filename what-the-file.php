@@ -40,7 +40,11 @@ class WhatTheFile {
 	 * Method run on plugin activation
 	 */
 	public static function plugin_activation() {
-		self::insert_install_date();
+		// include nag class
+		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-wtf-nag.php' );
+
+		// insert install date
+		WTF_Nag::insert_install_date();
 	}
 
 	/**
@@ -63,24 +67,12 @@ class WhatTheFile {
 			return false;
 		}
 
-		// Admin notice hide catch
-		$this->catch_hide_notice();
+		// include nag class
+		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-wtf-nag.php' );
 
-		// Is admin notice hidden?
-		$current_user = wp_get_current_user();
-		$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
-
-		// Check if we need to display the notice
-		if ( current_user_can( 'install_plugins' ) && '' == $hide_notice ) {
-			// Get installation date
-			$datetime_install = $this->get_install_date();
-			$datetime_past    = new DateTime( '-10 days' );
-
-			if ( $datetime_past >= $datetime_install ) {
-				// 10 or more days ago, show admin notice
-				add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
-			}
-		}
+		// setup nag
+		$nag = new WTF_Nag();
+		$nag->setup();
 	}
 
 	/**
@@ -108,33 +100,6 @@ class WhatTheFile {
 		add_action( 'all', array( $this, 'save_template_parts' ), 1, 3 );
 	}
 
-	/**
-	 * Insert the install date
-	 *
-	 * @return string
-	 */
-	private static function insert_install_date() {
-		$datetime_now = new DateTime();
-		$date_string  = $datetime_now->format( 'Y-m-d' );
-		add_site_option( self::OPTION_INSTALL_DATE, $date_string, '', 'no' );
-
-		return $date_string;
-	}
-
-	/**
-	 * Get the install data
-	 *
-	 * @return DateTime
-	 */
-	private function get_install_date() {
-		$date_string = get_site_option( self::OPTION_INSTALL_DATE, '' );
-		if ( $date_string == '' ) {
-			// There is no install date, plugin was installed before version 1.2.0. Add it now.
-			$date_string = self::insert_install_date();
-		}
-
-		return new DateTime( $date_string );
-	}
 
 	/**
 	 * Get the current page
@@ -143,17 +108,6 @@ class WhatTheFile {
 	 */
 	private function get_current_page() {
 		return $this->template_name;
-	}
-
-	/**
-	 * Parse the admin query string
-	 *
-	 * @return array
-	 */
-	private function get_admin_querystring_array() {
-		parse_str( $_SERVER['QUERY_STRING'], $params );
-
-		return $params;
 	}
 
 	/**
@@ -216,49 +170,6 @@ class WhatTheFile {
 				$this->template_parts[] = $template_part;
 			}
 		}
-
-	}
-
-	/**
-	 * Catch the notice dismissal action
-	 */
-	public function catch_hide_notice() {
-		if ( isset( $_GET[ self::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
-			// Add user meta
-			global $current_user;
-			add_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1', true );
-
-			// Build redirect URL
-			$query_params = $this->get_admin_querystring_array();
-			unset( $query_params[ self::OPTION_ADMIN_NOTICE_KEY ] );
-			$query_string = http_build_query( $query_params );
-			if ( $query_string != '' ) {
-				$query_string = '?' . $query_string;
-			}
-
-			$redirect_url = 'http';
-			if ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ) {
-				$redirect_url .= 's';
-			}
-			$redirect_url .= '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . $query_string;
-
-			// Redirect
-			wp_redirect( $redirect_url );
-			exit;
-		}
-	}
-
-	/**
-	 * Display the admin notice
-	 */
-	public function display_admin_notice() {
-
-		$query_params = $this->get_admin_querystring_array();
-		$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
-
-		echo '<div class="updated"><p>';
-		printf( __( "You've been using <b>What The File</b> for some time now, could you please give it a review at wordpress.org? <br /><br /> <a href='%s' target='_blank'>Yes, take me there!</a> - <a href='%s'>I've already done this!</a>" ), 'http://wordpress.org/support/view/plugin-reviews/what-the-file', $query_string );
-		echo "</p></div>";
 
 	}
 
