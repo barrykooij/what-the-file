@@ -41,7 +41,7 @@ class WhatTheFile {
 	 */
 	public static function plugin_activation() {
 		// include nag class
-		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-wtf-nag.php' );
+		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-nag.php' );
 
 		// insert install date
 		WTF_Nag::insert_install_date();
@@ -68,11 +68,18 @@ class WhatTheFile {
 		}
 
 		// include nag class
-		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-wtf-nag.php' );
+		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-nag.php' );
 
 		// setup nag
 		$nag = new WTF_Nag();
 		$nag->setup();
+
+		// include plugin links class
+		require_once( plugin_dir_path( __FILE__ ) . '/classes/class-plugin-links.php' );
+
+		// setup plugin links
+		$plugin_links = new WTF_Plugin_Links();
+		$plugin_links->setup();
 	}
 
 	/**
