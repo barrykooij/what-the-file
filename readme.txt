@@ -47,6 +47,7 @@ Yes it does.
 == Changelog ==
 
 * Removed use of create_function.
+
 = 1.4.1 =
 * Fixed wrongly aligned arrow in MP6 - props [remyvv](https://github.com/remyvv).
 * Template parts are now correctly shown in child themes - props [remyvv](https://github.com/remyvv).
