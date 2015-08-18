@@ -1,5 +1,5 @@
 === What The File ===
-Contributors: barrykooij
+Contributors: never5, barrykooij
 Donate link: http://www.barrykooij.com/donate/
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
