@@ -281,7 +281,7 @@ class WhatTheFile {
 			'id'     => 'wtf-bar-powered-by',
 			'parent' => 'wtf-bar',
 			'title'  => 'Powered by Never5',
-			'href'   => 'http://www.never5.com'
+			'href'   => 'http://www.never5.com?utm_source=plugin&utm_medium=wtf-bar&utm_campaign=what-the-file'
 		) );
 
 	}
