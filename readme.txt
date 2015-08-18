@@ -1,14 +1,14 @@
 === What The File ===
 Contributors: barrykooij
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7QDZTLCRKSMG
+Donate link: http://www.barrykooij.com/donate/
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
-Tested up to: 3.8.1
-Stable tag: 1.4.1
+Tested up to: 4.3
+Stable tag: 1.5.0
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-What The File adds an option to your toolbar showing what file and template parts are used to display the page you're currently viewing.
+What The File is the best tool to find out what template parts are used to display the page you're currently viewing!
 
 == Description ==
 
@@ -40,6 +40,10 @@ Yes it does.
 
 Yes it does.
 
+= You saved me so much time, is there any way I can thank you? =
+
+Glad to hear I could help you! You can thank me in various ways, please see [my donation page](http://www.barrykooij.com/donate/) to find out more.
+
 == Screenshots ==
 
 1. What The File shows you what template file is used.
@@ -50,6 +54,7 @@ Yes it does.
 * Only add edit link if direct file editing is allowed. Props szepeviktor
 * Wrapped initiation in hooks and split frontend and admin code.
 * Removed use of create_function.
+* Various code optimizations.
 
 = 1.4.1 =
 * Fixed wrongly aligned arrow in MP6 - props [remyvv](https://github.com/remyvv).
