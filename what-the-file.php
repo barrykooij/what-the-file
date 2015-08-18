@@ -227,7 +227,7 @@ class WhatTheFile {
 		$wp_admin_bar->add_menu( array(
 			'id'     => 'wtf-bar',
 			'parent' => 'top-secondary',
-			'title'  => __( 'What The File', 'what-the-file' ) . '<img src="'.plugins_url( 'assets/images/never5-logo.png', __FILE__ ).'" />',
+			'title'  => __( 'What The File', 'what-the-file' ),
 			'href'   => false
 		) );
 
@@ -290,7 +290,7 @@ class WhatTheFile {
 	 * Print the custom CSS
 	 */
 	public function print_css() {
-		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar img {margin:-4px 0 0 6px;}#wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }#wp-admin-bar-wtf-bar-powered-by{text-align: right;}#wp-admin-bar-wtf-bar-powered-by a{color:#ffa100 !important;}</style>\n";
+		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar .ab-item{padding-right:26px !important;background: url('" . plugins_url( 'assets/images/never5-logo.png', __FILE__ ) . "')center right no-repeat;} #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }#wp-admin-bar-wtf-bar-powered-by{text-align: right;}#wp-admin-bar-wtf-bar-powered-by a{color:#ffa100 !important;}</style>\n";
 	}
 
 }
