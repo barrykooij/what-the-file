@@ -290,7 +290,7 @@ class WhatTheFile {
 	 * Print the custom CSS
 	 */
 	public function print_css() {
-		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar .ab-item{padding-right:26px !important;background: url('" . plugins_url( 'assets/images/never5-logo.png', __FILE__ ) . "')center right no-repeat;} #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }#wp-admin-bar-wtf-bar-powered-by{text-align: right;}#wp-admin-bar-wtf-bar-powered-by a{color:#ffa100 !important;}</style>\n";
+		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar > .ab-item{padding-right:26px !important;background: url('" . plugins_url( 'assets/images/never5-logo.png', __FILE__ ) . "')center right no-repeat !important;} #wp-admin-bar-wtf-bar.hover > .ab-item {background-color: #32373c !important; } #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }#wp-admin-bar-wtf-bar-powered-by{text-align: right;}#wp-admin-bar-wtf-bar-powered-by a{color:#ffa100 !important;}</style>\n";
 	}
 
 }
