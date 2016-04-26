@@ -209,6 +209,8 @@ class WhatTheFile {
 		// Do Roots Theme check
 		if ( function_exists( 'roots_template_path' ) ) {
 			$this->template_name = basename( roots_template_path() );
+		} else if( function_exists( 'Roots\Sage\Wrapper\template_path' ) ) {
+			$this->template_name = basename( Roots\Sage\Wrapper\template_path() );
 		}
 
 		return $template_name;
