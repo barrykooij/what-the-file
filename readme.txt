@@ -50,6 +50,9 @@ Glad to hear I could help you! You can thank me in various ways, please see [my 
 
 == Changelog ==
 
+= 1.5.3: May 2, 2016 =
+* Appended an extra check for the Sage starter theme, props [remyvv](https://github.com/remyvv).
+
 = 1.5.2 =
 * Fixed a CSS bug with admin bar.
 
