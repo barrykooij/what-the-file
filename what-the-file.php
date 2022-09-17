@@ -325,16 +325,10 @@ class WhatTheFile {
 		foreach ( $this->template_parts as $template_part ) {
 
 			// dedupe template parts
-			$exists = false;
 			foreach ( $templates as $t ) {
 				if ( $t['file'] == $template_part ) {
-					$exists = true;
-					break;
+					continue 2;
 				}
-			}
-
-			if ( $exists ) {
-				continue;
 			}
 
 			$theme = get_stylesheet();
