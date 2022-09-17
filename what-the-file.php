@@ -148,9 +148,9 @@ class WhatTheFile {
 	/**
 	 * Save the template parts in our array
 	 *
-	 * @param $tag
-	 * @param null $slug
-	 * @param null $name
+	 * @param string $tag
+	 * @param string|null $slug
+	 * @param string|null $name
 	 */
 	public function save_template_parts( $tag, $slug = null, $name = null ) {
 		if ( 0 !== strpos( $tag, 'get_template_part_' ) ) {
