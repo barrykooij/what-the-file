@@ -7,6 +7,7 @@
 	Author: Never5
 	Author URI: http://www.never5.com/
 	License: GPL v3
+	Requires PHP: 5.3
 
 	What The File Plugin
 	Copyright (C) 2012-2022, Never5 - www.never5.com
