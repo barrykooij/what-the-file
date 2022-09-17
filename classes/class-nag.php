@@ -6,13 +6,11 @@ class WTF_Nag {
 	 * Setup the class
 	 */
 	public function setup() {
-		
 		// catch nag hide
 		$this->catch_hide_notice();
-		
+
 		// bind nag
 		$this->bind();
-		
 	}
 
 	/**
