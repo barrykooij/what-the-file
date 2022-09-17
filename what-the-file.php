@@ -128,7 +128,7 @@ class WhatTheFile {
 	 * @return bool
 	 */
 	private function file_exists_in_child_theme( $file ) {
-		return file_exists( STYLESHEETPATH . '/' . $file );
+		return file_exists( get_stylesheet_directory() . '/' . $file );
 	}
 
 	/**
