@@ -310,7 +310,7 @@ class WhatTheFile {
 	 * @return void
 	 */
 	public function enqueue_frontend_script() {
-		wp_enqueue_script( 'rp4wp-frontend-js', plugin_dir_url( __FILE__ ) . 'assets/js/what-the-file.js', false, 1.0, true );
+		wp_enqueue_script( 'rp4wp-frontend-js', plugin_dir_url( __FILE__ ) . 'assets/js/what-the-file.js', array(), '1.0', true );
 	}
 
 	/**
