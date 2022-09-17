@@ -38,6 +38,10 @@ In the toolbar you will find the "What The File" option. Hovering this option wi
 
 You have to be an Administrator to see the "What The File" option.
 
+= What PHP version are supported / tested? =
+
+What The File works supports starts at PHP 5.3 and is tested on every major release up until PHP 8.1.
+
 = Does What The File supports BuddyPress =
 
 Yes it does.
