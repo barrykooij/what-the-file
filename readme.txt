@@ -53,6 +53,9 @@ Glad to hear I could help you! You can thank me in various ways, please see [my 
 
 == Changelog ==
 
+= 1.5.5: September 17, 2022 =
+* Version and meta update.
+
 = 1.5.4: October 8, 2017 =
 * Version and meta update.
 
