@@ -96,7 +96,7 @@ class WhatTheFile {
 		// WTF actions and filers
 		add_action( 'wp_head', array( $this, 'print_css' ) );
 		add_action( 'wp_footer', array( $this, 'print_frontend_js' ), 50 );
-		add_filter( 'template_include', array( $this, 'save_current_page' ), 1000 );
+		add_filter( 'template_include', array( $this, 'save_current_page' ), PHP_INT_MAX );
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 1000 );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_script' ) );

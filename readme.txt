@@ -57,8 +57,9 @@ Glad to hear I could help you! You can thank me in various ways, please see [my 
 == Changelog ==
 
 = 1.6.0: September 17, 2022 =
-* Now correctly working with the wp_body_open tag. Full template part support is back.
-* Version and meta update.
+* Feature: Now correctly working with the wp_body_open tag. Full template part support is back.
+* Tweak: Change template_include priority from 1000 to PHP_INT_MAX for wider support. props @greenshady
+* Tweak: Version and meta update.
 
 = 1.5.4: October 8, 2017 =
 * Version and meta update.
