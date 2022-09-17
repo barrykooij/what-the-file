@@ -64,7 +64,7 @@ class WhatTheFile {
 
 		// Check if user is an administrator
 		if ( ! current_user_can( 'manage_options' ) ) {
-			return false;
+			return;
 		}
 
 		// include nag class
