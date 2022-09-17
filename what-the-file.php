@@ -137,12 +137,7 @@ class WhatTheFile {
 	 * @return bool
 	 */
 	private function is_file_editing_allowed() {
-		$allowed = true;
-		if ( ( defined( 'DISALLOW_FILE_EDIT' ) && true == DISALLOW_FILE_EDIT ) || ( defined( 'DISALLOW_FILE_MODS' ) && true == DISALLOW_FILE_MODS ) ) {
-			$allowed = false;
-		}
-
-		return $allowed;
+		return ! ( ( defined( 'DISALLOW_FILE_EDIT' ) && true == DISALLOW_FILE_EDIT ) || ( defined( 'DISALLOW_FILE_MODS' ) && true == DISALLOW_FILE_MODS ) );
 	}
 
 	/**
