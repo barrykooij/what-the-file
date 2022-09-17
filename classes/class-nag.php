@@ -99,7 +99,7 @@ class WTF_Nag {
 	public static function insert_install_date() {
 		$datetime_now = new DateTime();
 		$date_string  = $datetime_now->format( 'Y-m-d' );
-		add_site_option( WhatTheFile::OPTION_INSTALL_DATE, $date_string, '', 'no' );
+		add_site_option( WhatTheFile::OPTION_INSTALL_DATE, $date_string );
 
 		return $date_string;
 	}
