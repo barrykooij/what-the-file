@@ -56,7 +56,7 @@ class WhatTheFile {
 	}
 
 	/**
-	 * Setup the admin hooks
+	 * Set up the admin hooks
 	 *
 	 * @return void
 	 */
@@ -83,7 +83,7 @@ class WhatTheFile {
 	}
 
 	/**
-	 * Setup the frontend hooks
+	 * Set up the frontend hooks
 	 *
 	 * @return void
 	 */
@@ -95,8 +95,11 @@ class WhatTheFile {
 
 		// WTF actions and filers
 		add_action( 'wp_head', array( $this, 'print_css' ) );
+		add_action( 'wp_footer', array( $this, 'print_frontend_js' ), 50 );
 		add_filter( 'template_include', array( $this, 'save_current_page' ), 1000 );
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 1000 );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_script' ) );
 
 		// BuddyPress support
 		if ( class_exists( 'BuddyPress' ) ) {
@@ -248,7 +251,7 @@ class WhatTheFile {
 		) );
 
 		// Check if theme uses template parts
-		if ( count( $this->template_parts ) > 0 ) {
+		//if ( count( $this->template_parts ) > 0 ) {
 
 			// Add template parts menu item
 			$wp_admin_bar->add_menu( array(
@@ -258,6 +261,15 @@ class WhatTheFile {
 				'href'   => false
 			) );
 
+			// add a dummy child, we replace this via JS
+			$wp_admin_bar->add_menu( array(
+				'id'     => 'wtf-bar-template-part-loading',
+				'parent' => 'wtf-bar-template-parts',
+				'title'  => 'Loading...',
+				'href'   => false
+			) );
+
+			/*
 			// Loop through template parts
 			foreach ( $this->template_parts as $template_part ) {
 
@@ -275,8 +287,9 @@ class WhatTheFile {
 					'href'   => ( ( $edit_allowed ) ? get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme : false )
 				) );
 			}
+			*/
 
-		}
+		//}
 
 		// Add powered by
 		$wp_admin_bar->add_menu( array(
@@ -293,6 +306,52 @@ class WhatTheFile {
 	 */
 	public function print_css() {
 		echo "<style type=\"text/css\" media=\"screen\">#wp-admin-bar-wtf-bar > .ab-item{padding-right:26px !important;background: url('" . plugins_url( 'assets/images/never5-logo.png', __FILE__ ) . "')center right no-repeat !important;} #wp-admin-bar-wtf-bar.hover > .ab-item {background-color: #32373c !important; } #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-file .ab-item, #wp-admin-bar-wtf-bar #wp-admin-bar-wtf-bar-template-parts {text-align:right;} #wp-admin-bar-wtf-bar-template-parts.menupop > .ab-item:before{ right:auto !important; }#wp-admin-bar-wtf-bar-powered-by{text-align: right;}#wp-admin-bar-wtf-bar-powered-by a{color:#ffa100 !important;}</style>\n";
+	}
+
+	/**
+	 * Enqueue frontend JS
+	 *
+	 * @return void
+	 */
+	public function enqueue_frontend_script() {
+		wp_enqueue_script( 'rp4wp-frontend-js', plugin_dir_url( __FILE__ ) . 'assets/js/what-the-file.js', false, 1.0, true );
+	}
+
+	/**
+	 * Print frontend JS
+	 *
+	 * @return void
+	 */
+	public function print_frontend_js() {
+
+		$templates = array();
+
+		foreach ( $this->template_parts as $template_part ) {
+
+			// dedupe template parts
+			$exists = false;
+			foreach ( $templates as $t ) {
+				if ( $t['file'] == $template_part ) {
+					$exists = true;
+					break;
+				}
+			}
+
+			if ( $exists ) {
+				continue;
+			}
+
+			$theme = get_stylesheet();
+			if ( ! $this->file_exists_in_child_theme( $template_part ) ) {
+				$theme = get_template();
+			}
+			$templates[] = array(
+				"edit_url" => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme,
+				"file"     => $template_part
+			);
+		}
+
+		echo "<script type='text/javascript'>var wtf_templates = " . json_encode( $templates ) . ";</script>";
 	}
 
 }
