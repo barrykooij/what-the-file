@@ -3,8 +3,8 @@ Contributors: never5, barrykooij
 Donate link: http://www.barrykooij.com/donate/
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
-Tested up to: 5.0
-Stable tag: 1.5.4
+Tested up to: 6.0.2
+Stable tag: 1.5.5
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,6 +16,9 @@ What The File adds an option to your toolbar showing what file and template part
 
 More information can be found <a href='http://www.barrykooij.com/what-the-file/'>here</a>.
 For support please visit the <a href='http://wordpress.org/support/plugin/what-the-file'>Support forum</a>.
+
+= Looking for a great related posts plugin for WordPress? =
+Another plugin I've build, that I'm very proud of is Related Posts for WordPress. Related Posts for WordPress offers you the ability to link related posts to each other with just 1 click! And it's 100% free! [Check it out on the WordPress repository.](https://wordpress.org/plugins/related-posts-for-wp/)
 
 == Installation ==
 
