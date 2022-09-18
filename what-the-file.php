@@ -30,6 +30,8 @@ class WhatTheFile {
 	const OPTION_INSTALL_DATE = 'whatthefile-install-date';
 	const OPTION_ADMIN_NOTICE_KEY = 'whatthefile-hide-notice';
 
+	CONST VERSION = '1.6.0';
+
 	/** @var string $template_name */
 	private $template_name = '';
 
@@ -310,7 +312,7 @@ class WhatTheFile {
 	 * @return void
 	 */
 	public function enqueue_frontend_script() {
-		wp_enqueue_script( 'rp4wp-frontend-js', plugin_dir_url( __FILE__ ) . 'assets/js/what-the-file.js', array(), '1.0', true );
+		wp_enqueue_script( 'rp4wp-frontend-js', plugin_dir_url( __FILE__ ) . 'assets/js/what-the-file.js', array(), self::VERSION, true );
 	}
 
 	/**
