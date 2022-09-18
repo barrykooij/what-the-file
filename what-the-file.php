@@ -302,6 +302,8 @@ class WhatTheFile {
 	 */
 	public function print_frontend_js() {
 
+		$edit_allowed = $this->is_file_editing_allowed();
+
 		$templates = array();
 
 		foreach ( $this->template_parts as $template_part ) {
@@ -317,8 +319,9 @@ class WhatTheFile {
 			if ( ! $this->file_exists_in_child_theme( $template_part ) ) {
 				$theme = get_template();
 			}
+
 			$templates[] = array(
-				"edit_url" => get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme,
+				"edit_url" => ( ( $edit_allowed ) ? get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme : false ),
 				"file"     => $template_part
 			);
 		}

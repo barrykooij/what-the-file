@@ -16,9 +16,17 @@ window.addEventListener('load', (event) => {
 		for (let i = 0; i < wtf_templates.length; i++) {
 			let listItem = document.createElement("li");
 			listItem.id = "wp-admin-bar-wtf-bar-template-part-template-parts/" + i;
-			let templateName = document.createElement("a");
-			templateName.className="ab-item";
-			templateName.href = wtf_templates[i].edit_url;
+
+			let templateName;
+
+			if(wtf_templates[i].edit_url !== false) {
+				templateName = document.createElement("a");
+				templateName.className ="ab-item";
+				templateName.href = wtf_templates[i].edit_url;
+			}else {
+				templateName = document.createElement("span");
+				templateName.className ="ab-item ab-empty-item";
+			}
 			templateName.textContent = wtf_templates[i].file;
 
 			listItem.appendChild(templateName);
