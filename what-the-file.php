@@ -269,27 +269,6 @@ class WhatTheFile {
 			'href'   => false
 		) );
 
-		/*
-		// Loop through template parts
-		foreach ( $this->template_parts as $template_part ) {
-
-			// Check if template part exists in child theme
-			$theme = get_stylesheet();
-			if ( ! $this->file_exists_in_child_theme( $template_part ) ) {
-				$theme = get_template();
-			}
-
-			// Add template part to sub menu item
-			$wp_admin_bar->add_menu( array(
-				'id'     => 'wtf-bar-template-part-' . $template_part,
-				'parent' => 'wtf-bar-template-parts',
-				'title'  => $template_part,
-				'href'   => ( ( $edit_allowed ) ? get_admin_url() . 'theme-editor.php?file=' . $template_part . '&theme=' . $theme : false )
-			) );
-		}
-		*/
-
-
 		// Add powered by
 		$wp_admin_bar->add_menu( array(
 			'id'     => 'wtf-bar-powered-by',
