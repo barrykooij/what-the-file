@@ -22,7 +22,7 @@ What The File supports BuddyPress and Roots Theme based themes.
 More information can be found <a href='http://www.barrykooij.com/what-the-file/'>here</a>.
 
 = Looking for a great related posts plugin for WordPress? =
-Another plugin I've build, that I'm very proud of is Related Posts for WordPress. Related Posts for WordPress offers you the ability to link related posts to each other with just 1 click! And it's 100% free! [Check it out on the WordPress repository.](https://wordpress.org/plugins/related-posts-for-wp/)
+Another plugin I've built, that I'm very proud of is Related Posts for WordPress. Related Posts for WordPress offers you the ability to link related posts to each other with just 1 click! And it's 100% free! [Check it out on the WordPress repository.](https://wordpress.org/plugins/related-posts-for-wp/)
 
 == Installation ==
 
@@ -61,8 +61,10 @@ Glad to hear I could help you! You can thank me in various ways, please see [my 
 
 == Changelog ==
 
-= 1.6.0: September 17, 2022 =
+= 1.6.0: September 19, 2022 =
 * Feature: Now correctly working with the wp_body_open tag. Full template part support is back.
+* Tweak: Used proper add_site_option argument count. props @szepeviktor
+* Tweak: Optimized file editing allowed function. props @szepeviktor
 * Tweak: Change template_include priority from 1000 to PHP_INT_MAX for wider support. props @greenshady
 * Tweak: Version and meta update.
 
