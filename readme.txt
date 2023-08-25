@@ -4,7 +4,7 @@ Donate link: http://www.barrykooij.com/donate/
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
 Requires PHP: 5.3
-Tested up to: 6.0.2
+Tested up to: 6.3
 Stable tag: 1.6.0
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
