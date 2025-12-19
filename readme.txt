@@ -4,8 +4,8 @@ Donate link: http://www.barrykooij.com/donate/
 Tags: toolbar, development, file, template, template editing, Template Hierarchy, theme, themes, php, php file, template part
 Requires at least: 3.1
 Requires PHP: 5.3
-Tested up to: 6.3
-Stable tag: 1.6.0
+Tested up to: 6.9
+Stable tag: 1.6.1
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,6 +60,9 @@ Glad to hear I could help you! You can thank me in various ways, please see [my 
 1. What The File shows you what template file is used.
 
 == Changelog ==
+
+= 1.6.1: December 19, 2025 =
+* Tweak: Tested with the latest version of WP and meta update.
 
 = 1.6.0: September 19, 2022 =
 * Feature: Now correctly working with the wp_body_open tag. Full template part support is back.
