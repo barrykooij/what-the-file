@@ -1,0 +1,41 @@
+name: Release plugin
+on:
+  release:
+    types: [published]
+jobs:
+  release:
+    name: New release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build
+      uses: php-actions/composer@v6
+      with:
+        command: install
+        dev: no
+        version: 2
+        php_version: 7.4
+
+    - name: WordPress Plugin Deploy
+      id: deploy
+      uses: 10up/action-wordpress-plugin-deploy@stable
+      with:
+        generate-zip: true
+      env:
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SLUG: what-the-file
+
+    - name: Upload release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ${{ github.workspace }}/what-the-file.zip
+        asset_name: what-the-file.zip
+        asset_content_type: application/zip
